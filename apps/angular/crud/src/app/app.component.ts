@@ -1,52 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { randText } from '@ngneat/falso';
-import { Todo } from './todo/todo.model';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { TodoService } from './todo/todo.service';
 
 @Component({
   standalone: true,
   imports: [CommonModule],
   selector: 'app-root',
   template: `
-    <div *ngFor="let todo of todos">
+    <div *ngFor="let todo of todoService.todos$ | async">
       {{ todo.title }}
-      <button (click)="update(todo)">Update</button>
+      <button (click)="todoService.update(todo)">Update</button>
     </div>
   `,
-  styles: [],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  todos!: Todo[];
-
-  constructor(private http: HttpClient) {}
+  constructor(public readonly todoService: TodoService) {}
 
   ngOnInit(): void {
-    this.http
-      .get<Todo[]>('https://jsonplaceholder.typicode.com/todos')
-      .subscribe((todos) => {
-        this.todos = todos;
-      });
-  }
-
-  update(todo: Todo) {
-    this.http
-      .put<Todo>(
-        `https://jsonplaceholder.typicode.com/todos/${todo.id}`,
-        JSON.stringify({
-          id: todo.id,
-          title: randText(),
-          completed: todo.completed,
-          userId: todo.userId,
-        }),
-        {
-          headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        }
-      )
-      .subscribe((todoUpdated: Todo) => {
-        this.todos[todoUpdated.id - 1] = todoUpdated;
-      });
+    this.todoService.fetchTodos();
   }
 }
