@@ -23,4 +23,14 @@ export class TodoService {
       )
     );
   }
+
+  delete(todoToDelete: Todo) {
+    this.apiService
+      .delete(todoToDelete)
+      .subscribe(() =>
+        this.todos.next(
+          this.todos.getValue().filter((todo) => todo.id !== todoToDelete.id)
+        )
+      );
+  }
 }

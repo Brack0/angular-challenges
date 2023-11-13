@@ -10,6 +10,7 @@ import { TodoService } from './todo/todo.service';
     <div *ngFor="let todo of todoService.todos$ | async">
       {{ todo.title }}
       <button (click)="todoService.update(todo)">Update</button>
+      <button (click)="todoService.delete(todo)">Delete</button>
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,

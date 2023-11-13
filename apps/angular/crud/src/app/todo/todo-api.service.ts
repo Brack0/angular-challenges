@@ -28,4 +28,10 @@ export class TodoApiService {
       }
     );
   }
+
+  delete(todo: Todo): Observable<unknown> {
+    return this.http.delete<unknown>(
+      `https://jsonplaceholder.typicode.com/todos/${todo.id}`
+    );
+  }
 }
