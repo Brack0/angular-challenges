@@ -9,8 +9,12 @@ import { TodoService } from './todo.service';
   template: `
     <div *ngFor="let todo of todoService.todos$ | async">
       {{ todo.title }}
-      <button (click)="todoService.update(todo)">Update</button>
-      <button (click)="todoService.delete(todo)">Delete</button>
+      <button data-test-class="update" (click)="todoService.update(todo)">
+        Update
+      </button>
+      <button data-test-class="delete" (click)="todoService.delete(todo)">
+        Delete
+      </button>
     </div>
   `,
 })
