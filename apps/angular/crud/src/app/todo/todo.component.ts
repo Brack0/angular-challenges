@@ -1,6 +1,6 @@
 import { AsyncPipe, NgFor } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { TodoService } from './todo.service';
+import { TodoService } from './services/todo.service';
 
 @Component({
   standalone: true,

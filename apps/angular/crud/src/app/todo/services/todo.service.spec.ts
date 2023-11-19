@@ -1,7 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { EMPTY, filter, of } from 'rxjs';
-import { TodoApiService } from './todo-api.service';
-import { fakeTodos } from './todo.model';
+import { TodoApiService } from '../api/todo-api.service';
+import { fakeTodos } from '../todo.model';
+import { TodoBehaviorSubjectService } from './todo-behavior-subject.service';
 import { TodoService } from './todo.service';
 
 describe('TodoService', () => {
@@ -10,6 +11,7 @@ describe('TodoService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
+        { provide: TodoService, useClass: TodoBehaviorSubjectService },
         {
           provide: TodoApiService,
           useValue: {

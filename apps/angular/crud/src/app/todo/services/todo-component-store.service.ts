@@ -1,10 +1,11 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { TodoApiService } from './todo-api.service';
-import { Todo } from './todo.model';
+import { TodoApiService } from '../api/todo-api.service';
+import { Todo } from '../todo.model';
+import { TodoService } from './todo.service';
 
-@Injectable({ providedIn: 'root' })
-export class TodoService {
+@Injectable()
+export class TodoComponentStoreService implements TodoService {
   private readonly apiService = inject(TodoApiService);
   private readonly todos = new BehaviorSubject<Todo[]>([]);
   readonly todos$ = this.todos.asObservable();

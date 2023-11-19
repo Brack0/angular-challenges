@@ -2,9 +2,9 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { BehaviorSubject } from 'rxjs';
+import { TodoService } from './services/todo.service';
 import { TodoComponent } from './todo.component';
 import { Todo, fakeTodos } from './todo.model';
-import { TodoService } from './todo.service';
 
 describe('TodoComponent', () => {
   let component: TodoComponent;

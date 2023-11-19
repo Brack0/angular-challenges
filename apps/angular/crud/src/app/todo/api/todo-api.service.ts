@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { randText } from '@ngneat/falso';
 import { Observable } from 'rxjs';
-import { Todo } from './todo.model';
+import { Todo } from '../todo.model';
 
 @Injectable({ providedIn: 'root' })
 export class TodoApiService {
